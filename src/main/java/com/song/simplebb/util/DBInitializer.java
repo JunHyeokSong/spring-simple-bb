@@ -9,10 +9,13 @@ import java.sql.Statement;
 public class DBInitializer {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Connection c = DBConnection.getConnection();
+        String dropUsersQuery = "DROP TABLE IF EXISTS users";
+        String dropArticlesQuery = "DROP TABLE IF EXISTS articles";
+
         String createUsersQuery =
                 "CREATE TABLE users (" +
                     "uid VARCHAR(10) primary key," +
-                    "name VARCHAR(10)" +
+                    "name VARCHAR(20)" +
                 ")";
 
         String createArticlesQuery =
@@ -24,11 +27,12 @@ public class DBInitializer {
                 ")";
 
         Statement stmt = c.createStatement();
+        stmt.execute(dropUsersQuery);
+        stmt.execute(dropArticlesQuery);
         stmt.execute(createUsersQuery);
         stmt.execute(createArticlesQuery);
 
         stmt.close();
         c.close();
     }
-
 }

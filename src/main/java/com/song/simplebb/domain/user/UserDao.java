@@ -12,7 +12,7 @@ public class UserDao {
         return instance;
     }
 
-    public User getUserById (String id) throws ClassNotFoundException, SQLException {
+    public User getUserById (String id) throws SQLException {
         Connection c = DBConnection.getConnection();
         String getUserByIdQuery = "select * from users where uid=?";
         PreparedStatement pstmt = c.prepareStatement(getUserByIdQuery);
@@ -31,7 +31,7 @@ public class UserDao {
         return user;
     }
 
-    public void setUser (User user) throws ClassNotFoundException, SQLException {
+    public void addUser (User user) throws SQLException {
         Connection c = DBConnection.getConnection();
         String insertUserQuery = "insert into users (uid, name) values (?, ?)";
         PreparedStatement pstmt = c.prepareStatement(insertUserQuery);
@@ -41,25 +41,5 @@ public class UserDao {
 
         pstmt.close();
         return;
-    }
-
-    public static void main (String[] args) throws ClassNotFoundException, SQLException {
-        User usr = new User();
-        usr.setId("123d451");
-        usr.setName("song");
-
-        UserDao userDao = UserDao.getUserDao();
-
-        try {
-            userDao.setUser(usr);
-            System.out.println("set usr!");
-        }
-        catch (SQLException e) {
-            System.out.println("set user fail... SQL Exception");
-        }
-
-        User usr2 = userDao.getUserById(usr.getId());
-        System.out.println("get usr2!");
-        System.out.println("Your name: " + usr2.getName());
     }
 }
