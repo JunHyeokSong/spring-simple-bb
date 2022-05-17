@@ -1,14 +1,17 @@
 package com.song.simplebb.domain.article.controller;
 
-import com.song.simplebb.domain.article.article;
+import com.song.simplebb.domain.article.Article;
+import com.song.simplebb.domain.user.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class articleController {
+public class ArticleController {
     @GetMapping("/api/getArticle")
-    article getArticle(@RequestParam("articleid") String aid) {
-        return new article();
+    Article getArticle(@RequestParam("articleid") String aid) {
+        UserDao u = UserDao.getUserDao();
+        return new Article();
+
     }
 }

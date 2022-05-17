@@ -1,6 +1,6 @@
 package com.song.simplebb.domain.article;
 
-public class article {
+public class Article {
     private String articleId;
     private String writerId;
     private String title;
